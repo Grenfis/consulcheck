@@ -1,0 +1,15 @@
+{
+    "name": "grenfis/consulcheck",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "grenfis"
+        }
+    ],
+    "require": {}
+}
