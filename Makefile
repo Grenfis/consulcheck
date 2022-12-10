@@ -19,3 +19,6 @@ down:
 
 install:
 	$(docker) exec $(cli_container_name) sh -c "composer install && composer  dump-autoload"
+
+require:
+	$(docker) exec $(cli_container_name) sh -c "composer require $(pkg) && composer  dump-autoload"
