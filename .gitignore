@@ -3,3 +3,4 @@ docker/logs
 .idea
 .git
 /vendor/
+app/config/config.php

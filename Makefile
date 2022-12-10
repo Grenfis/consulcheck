@@ -17,6 +17,12 @@ up:
 down:
 	$(docker_compose) down
 
+ps:
+	$(docker_compose) ps
+
+cli:
+	$(docker) exec -it $(cli_container_name) bash
+
 install:
 	$(docker) exec $(cli_container_name) sh -c "composer install && composer  dump-autoload"
 

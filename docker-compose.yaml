@@ -21,6 +21,23 @@ services:
       - "4444:4444"
       - "7900:7900"
 
+  db:
+    container_name: "${PROJECT_NAME}-db"
+    image: mysql:8.0.31
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    volumes:
+      - ${SRC_PATH}/docker/data/mysql:/var/lib/mysql
+    networks:
+      app:
+        ipv4_address: ${DB_IP}
+
   fpm:
     container_name: "${PROJECT_NAME}-fpm"
     restart: unless-stopped
@@ -33,10 +50,10 @@ services:
       - ${SRC_PATH}/composer.lock:/var/www/php/composer.lock:rw
       - ${SRC_PATH}/vendor:/var/www/php/vendor:rw
 
-      - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./docker/php/fpm/pool.d/app.conf:/usr/local/etc/php-fpm.d/app.conf:ro
+      - ${SRC_PATH}/docker/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ${SRC_PATH}/docker/php/fpm/pool.d/app.conf:/usr/local/etc/php-fpm.d/app.conf:ro
 
-      - ./docker/data/socket:/var/run:rw
+      - ${SRC_PATH}/docker/data/socket:/var/run:rw
 
       - /etc/group:/etc/group:ro
       - /etc/passwd:/etc/passwd:ro
@@ -66,11 +83,13 @@ services:
       - ${SRC_PATH}/composer.json:/var/www/php/composer.json:rw
       - ${SRC_PATH}/composer.lock:/var/www/php/composer.lock:rw
       - ${SRC_PATH}/vendor:/var/www/php/vendor:rw
+      - ${SRC_PATH}/db:/var/www/php/db:rw
+      - ${SRC_PATH}/phinx.php:/var/www/php/phinx.php:rw
 
-      - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./docker/cron/crontab:/etc/crontabs/crontab:rw
+      - ${SRC_PATH}/docker/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ${SRC_PATH}/docker/cron/crontab:/etc/crontabs/crontab:rw
 
-      - ./docker/data/socket:/var/run:rw
+      - ${SRC_PATH}/docker/data/socket:/var/run:rw
 
       - /etc/group:/etc/group:ro
       - /etc/passwd:/etc/passwd:ro
@@ -86,13 +105,13 @@ services:
     volumes:
       - ${SRC_PATH}:/var/www/php:rw
 
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ${SRC_PATH}/docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${SRC_PATH}/docker/nginx/conf.d:/etc/nginx/conf.d:ro
 
-      - ./docker/data/tmp/nginx:/var/cache/nginx:rw
-      - ./docker/data/socket:/var/run:rw
+      - ${SRC_PATH}/docker/data/tmp/nginx:/var/cache/nginx:rw
+      - ${SRC_PATH}/docker/data/socket:/var/run:rw
 
-      - ./docker/logs/nginx:/var/log/nginx:rw
+      - ${SRC_PATH}/docker/logs/nginx:/var/log/nginx:rw
     ports:
       - ${NGINX_PORT}
     networks:
