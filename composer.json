@@ -12,6 +12,8 @@
         }
     ],
     "require": {
-        "klein/klein": "^2.1"
+        "klein/klein": "^2.1",
+        "rdlowrey/auryn": "^1.4",
+        "php-webdriver/webdriver": "^1.13"
     }
 }

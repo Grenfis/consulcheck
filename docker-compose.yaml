@@ -19,6 +19,7 @@ services:
         ipv4_address: ${SELENIUM_IP}
     ports:
       - "4444:4444"
+      - "7900:7900"
 
   fpm:
     container_name: "${PROJECT_NAME}-fpm"
