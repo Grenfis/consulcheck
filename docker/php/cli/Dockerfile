@@ -70,8 +70,8 @@ RUN docker-php-source delete
 
 WORKDIR ${APP_PATH}
 
-RUN curl -sS https://getcomposer.org/installer | php -- \
-  --install-dir=/usr/bin --filename=composer && chmod +x /usr/bin/composer
+#RUN curl -sS https://getcomposer.org/installer | php -- \
+#  --install-dir=/usr/bin --filename=composer && chmod +x /usr/bin/composer
 
 #COPY ./app /var/www/php/app
 #COPY ./composer.json /var/www/php/composer.json
