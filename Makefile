@@ -28,3 +28,9 @@ install:
 
 require:
 	$(docker) exec $(cli_container_name) sh -c "composer require $(pkg) && composer  dump-autoload"
+
+ph_create:
+	$(docker) exec $(cli_container_name) sh -c "php vendor/bin/phinx create $(name)" &&  sudo chown -R snippy:snippy db/migrations/
+
+ph_migrate:
+	$(docker) exec $(cli_container_name) sh -c "php vendor/bin/phinx migrate"

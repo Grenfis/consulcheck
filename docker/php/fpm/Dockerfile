@@ -15,8 +15,7 @@ RUN docker-php-ext-install \
   bcmath \
   opcache \
   pdo \
-  pgsql \
-  pdo_pgsql \
+  pdo_mysql \
   mbstring
 
 RUN apk add --no-cache \

@@ -14,7 +14,6 @@ RUN apk upgrade --update
 RUN apk add --no-cache \
     bash \
     nano \
-    postgresql-dev \
     busybox-suid \
     curl-dev \
     oniguruma-dev \
@@ -27,8 +26,7 @@ RUN docker-php-ext-install \
   bcmath \
   opcache \
   pdo \
-  pgsql \
-  pdo_pgsql \
+  pdo_mysql \
   mbstring
 
 RUN apk add --no-cache \
