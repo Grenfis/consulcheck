@@ -3,8 +3,8 @@
 namespace app\modules\telegram\actions;
 
 use app\modules\common\events\EventsDispatcher;
-use app\modules\common\ITelegramGateway;
 use app\modules\telegram\events\GetUpdatesWasUnsuccessful;
+use app\modules\telegram\ITelegramGateway;
 
 class PollUpdates
 {

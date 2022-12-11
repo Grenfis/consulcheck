@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\common;
+namespace app\modules\telegram;
 
 use app\modules\common\dto\TelegramGetUpdatesDto;
 

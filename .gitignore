@@ -4,3 +4,4 @@ docker/logs
 .git
 /vendor/
 app/config/config.php
+logs

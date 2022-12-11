@@ -3,7 +3,7 @@
 namespace app\modules\common\infrastructure;
 
 use app\modules\common\dto\TelegramGetUpdatesDto;
-use app\modules\common\ITelegramGateway;
+use app\modules\telegram\ITelegramGateway;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 
