@@ -6,7 +6,7 @@ interface IDB
 {
     public function prepare(string $query);
 
-    public function execute(array $args);
+    public function execute(?array $args = null);
 
     public function result(): array;
 

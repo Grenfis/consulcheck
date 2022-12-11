@@ -35,7 +35,7 @@ class DB implements IDB
         $this->stmt = self::$pdo->prepare($query);
     }
 
-    public function execute(array $args)
+    public function execute(?array $args = null)
     {
         $this->stmt->execute($args);
     }
