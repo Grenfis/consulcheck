@@ -2,7 +2,7 @@
 
 namespace app\modules\checker\actions;
 
-use app\modules\common\ISeleniumGateway;
+use app\modules\checker\ISeleniumGateway;
 
 class AvailabilityCheck
 {

@@ -2,11 +2,9 @@
 
 namespace app\modules\common\infrastructure;
 
-use app\modules\common\ISeleniumGateway;
+use app\modules\checker\ISeleniumGateway;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Facebook\WebDriver\WebDriverBy;
-use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class SeleniumGateway implements ISeleniumGateway
 {
