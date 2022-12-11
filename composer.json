@@ -18,6 +18,7 @@
         "longman/telegram-bot": "^0.80.0",
         "robmorgan/phinx": "^0.13.3",
         "league/event": "^3.0",
-        "monolog/monolog": "^2.8"
+        "monolog/monolog": "^2.8",
+        "php-telegram-bot/fluent-keyboard": "^1.0"
     }
 }
