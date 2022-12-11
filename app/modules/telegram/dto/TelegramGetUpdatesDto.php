@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\common\dto;
+namespace app\modules\telegram\dto;
 
 class TelegramGetUpdatesDto
 {

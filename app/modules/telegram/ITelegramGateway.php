@@ -2,7 +2,7 @@
 
 namespace app\modules\telegram;
 
-use app\modules\common\dto\TelegramGetUpdatesDto;
+use app\modules\telegram\dto\TelegramGetUpdatesDto;
 
 interface ITelegramGateway
 {

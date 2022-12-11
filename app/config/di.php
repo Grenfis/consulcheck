@@ -1,6 +1,6 @@
 <?php
 
 return [
-    \app\modules\checker\ISeleniumGateway::class => app\modules\common\infrastructure\SeleniumGateway::class,
-    \app\modules\telegram\ITelegramGateway::class => app\modules\common\infrastructure\TelegramGateway::class,
+    \app\modules\checker\ISeleniumGateway::class => \app\modules\checker\infrastructure\SeleniumGateway::class,
+    \app\modules\telegram\ITelegramGateway::class => \app\modules\telegram\infrastructure\TelegramGateway::class,
 ];

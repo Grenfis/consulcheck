@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\common\infrastructure;
+namespace app\modules\telegram\infrastructure;
 
-use app\modules\common\dto\TelegramGetUpdatesDto;
+use app\modules\telegram\dto\TelegramGetUpdatesDto;
 use app\modules\telegram\ITelegramGateway;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;

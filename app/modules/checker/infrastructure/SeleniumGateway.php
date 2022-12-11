@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\common\infrastructure;
+namespace app\modules\checker\infrastructure;
 
 use app\modules\checker\ISeleniumGateway;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
