@@ -8,7 +8,7 @@ use Monolog\Logger as MonologLogger;
 
 class Logger
 {
-    private static ?self $instance;
+    private static ?self $instance = null;
 
     private MonologLogger $logger;
 

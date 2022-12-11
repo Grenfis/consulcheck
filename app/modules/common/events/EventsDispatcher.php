@@ -3,6 +3,7 @@
 namespace app\modules\common\events;
 
 use app\system\Common;
+use League\Event\EventDispatcher;
 use League\Event\EventDispatcher as LeagueEventDispatcher;
 
 class EventsDispatcher
@@ -13,10 +14,12 @@ class EventsDispatcher
 
     public function __construct()
     {
+        $this->dispatcher = new EventDispatcher();
+
         $defs =  require_once Common::getRoot() . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'events.php';
         foreach (array_keys($defs) as $event) {
             foreach($defs[$event] as $listener) {
-                $this->dispatcher->subscribeTo($event, $listener);
+                $this->dispatcher->subscribeTo($event, new $listener());
             }
         }
     }

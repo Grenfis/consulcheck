@@ -12,6 +12,4 @@ class TelegramGetUpdatesDto
         $this->isOk = $isOk;
         $this->description = $description;
     }
-
-
 }

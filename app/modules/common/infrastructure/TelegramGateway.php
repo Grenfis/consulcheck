@@ -36,7 +36,7 @@ class TelegramGateway implements ITelegramGateway
         $result = $this->telegram->handleGetUpdates();
         return new TelegramGetUpdatesDto(
             $result->isOk(),
-            $result->getDescription()
+            $result->getDescription() ?: ''
         );
     }
 }
