@@ -16,6 +16,7 @@
         "rdlowrey/auryn": "^1.4",
         "php-webdriver/webdriver": "^1.13",
         "longman/telegram-bot": "^0.80.0",
-        "robmorgan/phinx": "^0.13.3"
+        "robmorgan/phinx": "^0.13.3",
+        "league/event": "^3.0"
     }
 }
