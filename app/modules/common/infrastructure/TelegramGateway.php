@@ -2,6 +2,7 @@
 
 namespace app\modules\common\infrastructure;
 
+use app\modules\common\dto\TelegramGetUpdatesDto;
 use app\modules\common\ITelegramGateway;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
@@ -30,8 +31,12 @@ class TelegramGateway implements ITelegramGateway
     /**
      * @throws TelegramException
      */
-    public function getUpdates()
+    public function getUpdates(): TelegramGetUpdatesDto
     {
-        $this->telegram->handleGetUpdates();
+        $result = $this->telegram->handleGetUpdates();
+        return new TelegramGetUpdatesDto(
+            $result->isOk(),
+            $result->getDescription()
+        );
     }
 }
