@@ -20,8 +20,8 @@ final class Users extends AbstractMigration
     {
         $table = $this->table('users', ['id' => 'user_id']);
         $table->addColumn('user_name', 'string', ['limit' => 30, 'null' => false])
-            ->addColumn('user_first_name', 'string', ['limit' => 30, 'null' => false])
-            ->addColumn('user_last_name', 'string', ['limit' => 30, 'null' => false])
+            ->addColumn('user_firstname', 'string', ['limit' => 30, 'null' => true])
+            ->addColumn('user_lastname', 'string', ['limit' => 30, 'null' => true])
             ->addColumn('user_is_admin', 'boolean', ['null' => false])
             ->addColumn('user_is_active', 'boolean', ['null' => false])
             ->addColumn('user_created_at', 'timestamp', ['null' => false])

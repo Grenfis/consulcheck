@@ -41,4 +41,9 @@ class Logger
     {
         $this->logger->warning($msg);
     }
+
+    public function info(string $msg)
+    {
+        $this->logger->info($msg);
+    }
 }

@@ -6,6 +6,8 @@ const SELENIUM_PORT = '4444';
 
 const TELEGRAM_BOT_KEY = '';
 const TELEGRAM_BOT_USERNAME = 'consulchecker_bot';
+const TELEGRAM_ADMIN_PASSWORD = '';
+
 
 const DB_HOST = '';
 const DB_PORT = '';

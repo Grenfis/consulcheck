@@ -3,7 +3,7 @@
 namespace app\modules\telegram\actions;
 
 use app\modules\common\events\EventsDispatcher;
-use app\modules\telegram\events\GetUpdatesWasUnsuccessful;
+use app\modules\common\events\LogMessage;
 use app\modules\telegram\ITelegramGateway;
 
 class PollUpdates
@@ -19,7 +19,7 @@ class PollUpdates
     {
         $result = $this->gateway->getUpdates();
         if (!$result->isOk) {
-            EventsDispatcher::instance()->emit(new GetUpdatesWasUnsuccessful($result->description));
+            EventsDispatcher::instance()->emit(new LogMessage('Telegram error: ' . $result->description, LogMessage::WARN));
         }
     }
 }
