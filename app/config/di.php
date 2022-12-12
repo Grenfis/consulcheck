@@ -3,6 +3,7 @@
 return [
     \app\modules\common\IDB::class => \app\modules\common\infrastructure\DB::class,
     \app\modules\common\ILogger::class => \app\modules\logger\Logger::class,
+    \app\modules\common\IEventDispatcher::class => \app\modules\events\EventDispatcher::class,
 
     \app\modules\checker\ISeleniumGateway::class => \app\modules\checker\infrastructure\SeleniumGateway::class,
 

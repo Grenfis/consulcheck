@@ -2,9 +2,7 @@
 
 namespace app\modules\bot\events;
 
-use app\modules\common\events\IEvent;
-
-class UserWantsToGyumri10 implements IEvent
+class UserWantsToGyumri10
 {
     private int $userId;
 

@@ -2,9 +2,9 @@
 
 namespace app\modules\bot\events;
 
-use app\modules\common\events\IEvent;
+use app\modules\events\IEvent;
 
-class NewAdminUserAppears implements IEvent
+class NewAdminUserAppears
 {
     private int $userId;
     private string $userName;

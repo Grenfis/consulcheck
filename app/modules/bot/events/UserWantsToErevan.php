@@ -2,9 +2,7 @@
 
 namespace app\modules\bot\events;
 
-use app\modules\common\events\IEvent;
-
-class UserWantsToErevan implements IEvent
+class UserWantsToErevan
 {
     private int $userId;
 
