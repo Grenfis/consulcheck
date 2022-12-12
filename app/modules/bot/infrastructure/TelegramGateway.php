@@ -5,6 +5,9 @@ namespace app\modules\bot\infrastructure;
 use app\modules\bot\dto\TelegramGetUpdatesDto;
 use app\modules\bot\IGateway;
 use app\modules\bot\infrastructure\commands\user\AddAdminCommand;
+use app\modules\bot\infrastructure\commands\user\Erevan5Command;
+use app\modules\bot\infrastructure\commands\user\Gyumri10Command;
+use app\modules\bot\infrastructure\commands\user\Gyumri5Command;
 use app\modules\bot\infrastructure\commands\user\StartCommand;
 use app\modules\bot\ITelegramGateway;
 use Longman\TelegramBot\Exception\TelegramException;
@@ -32,6 +35,9 @@ class TelegramGateway implements ITelegramGateway
 
         $this->telegram->addCommandClass(AddAdminCommand::class);
         $this->telegram->addCommandClass(StartCommand::class);
+        $this->telegram->addCommandClass(Erevan5Command::class);
+        $this->telegram->addCommandClass(Gyumri5Command::class);
+        $this->telegram->addCommandClass(Gyumri10Command::class);
 
         $adminsIds = $gateway->getAdminIds();
         $this->telegram->enableAdmins($adminsIds);
