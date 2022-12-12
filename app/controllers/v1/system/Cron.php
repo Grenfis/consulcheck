@@ -5,7 +5,7 @@ namespace app\controllers\v1\system;
 use app\controllers\Controller;
 use app\modules\checker\actions\AvailabilityCheck;
 use app\modules\common\DI;
-use app\modules\telegram\actions\PollUpdates;
+use app\modules\bot\actions\PollUpdates;
 use Auryn\InjectionException;
 
 class Cron extends Controller
