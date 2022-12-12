@@ -2,19 +2,20 @@
 
 namespace app\modules\users\listeners;
 
-use app\modules\common\events\EventsDispatcher;
-use app\modules\common\events\LogMessage;
-use app\modules\telegram\events\NewAdminUserAppears;
+use app\modules\bot\events\NewAdminUserAppears;
+use app\modules\common\ILogger;
 use app\modules\users\IUserRepository;
 use app\modules\users\User;
 
 class AddNewAdmin
 {
     private IUserRepository $repository;
+    private ILogger $logger;
 
-    public function __construct(IUserRepository $repository)
+    public function __construct(IUserRepository $repository, ILogger $logger)
     {
         $this->repository = $repository;
+        $this->logger = $logger;
     }
 
     public function __invoke(NewAdminUserAppears $event)
@@ -30,9 +31,6 @@ class AddNewAdmin
         );
         $this->repository->add($user);
 
-        EventsDispatcher::instance()->emit(new LogMessage(
-            'Новый админ добавлен! UserId = ' . $event->userId(),
-            LogMessage::INFO
-        ));
+        $this->logger->info('Новый админ добавлен! UserId = ' . $event->userId());
     }
 }

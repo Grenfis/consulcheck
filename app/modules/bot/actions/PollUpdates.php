@@ -2,24 +2,25 @@
 
 namespace app\modules\bot\actions;
 
-use app\modules\common\events\EventsDispatcher;
-use app\modules\common\events\LogMessage;
 use app\modules\bot\ITelegramGateway;
+use app\modules\common\ILogger;
 
 class PollUpdates
 {
     private ITelegramGateway $gateway;
+    private ILogger $logger;
 
-    public function __construct(ITelegramGateway $gateway)
+    public function __construct(ITelegramGateway $gateway, ILogger $logger)
     {
         $this->gateway = $gateway;
+        $this->logger = $logger;
     }
 
     public function poll()
     {
         $result = $this->gateway->getUpdates();
         if (!$result->isOk) {
-            EventsDispatcher::instance()->emit(new LogMessage('Telegram error: ' . $result->description, LogMessage::WARN));
+            $this->logger->warning('Telegram error: ' . $result->description);
         }
     }
 }

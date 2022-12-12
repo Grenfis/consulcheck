@@ -2,12 +2,16 @@
 
 namespace app\modules\bot\infrastructure\commands\user;
 
+use app\modules\common\DI;
 use app\modules\common\events\EventsDispatcher;
-use app\modules\common\events\LogMessage;
 use app\modules\bot\events\NewAdminUserAppears;
+use app\modules\common\ILogger;
+use Auryn\InjectionException;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
+use Longman\TelegramBot\Entities\Update;
 use Longman\TelegramBot\Request;
+use Longman\TelegramBot\Telegram;
 
 class AddAdminCommand extends UserCommand
 {
@@ -15,6 +19,18 @@ class AddAdminCommand extends UserCommand
     protected $description = 'Стать администратором проекта';
     protected $usage = '/i_am_admin';
     protected $version = '1.0.0';
+
+    private ILogger $logger;
+
+    /**
+     * @throws InjectionException
+     */
+    public function __construct(Telegram $telegram, ?Update $update = null)
+    {
+        $this->logger = DI::instance()->make(ILogger::class);
+
+        parent::__construct($telegram, $update);
+    }
 
     public function execute(): ServerResponse
     {
@@ -43,10 +59,7 @@ class AddAdminCommand extends UserCommand
             return Request::sendMessage($response);
         }
 
-        EventsDispatcher::instance()->emit(new LogMessage(
-            "Попытка стать администратором: user_id = $userId, chat_id = $chatId",
-            LogMessage::WARN
-        ));
+        $this->logger->warning("Попытка стать администратором: user_id = $userId, chat_id = $chatId");
         $response = [
             'chat_id' => $chatId,
             'text' => 'Неавторизованная операция. Об инциденте будет сообщено администратору.'

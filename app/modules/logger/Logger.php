@@ -2,48 +2,40 @@
 
 namespace app\modules\logger;
 
+use app\modules\common\ILogger;
 use app\system\Common;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as MonologLogger;
 
-class Logger
+class Logger implements ILogger
 {
-    private static ?self $instance = null;
-
-    private MonologLogger $logger;
+    private static ?MonologLogger $logger = null;
 
     public function __construct()
     {
-        $this->logger = new MonologLogger('main');
+        if (!self::$logger) {
+            self::$logger = new MonologLogger('main');
 
-        $pathParts = [
-            Common::getRoot(),
-            '..',
-            'logs',
-            $this->logger->getName() . '.log'
-        ];
+            $pathParts = [
+                Common::getRoot(),
+                '..',
+                'logs',
+                self::$logger->getName() . '.log'
+            ];
 
-        $this->logger->pushHandler(
-            new StreamHandler(implode(DIRECTORY_SEPARATOR, $pathParts), MonologLogger::INFO)
-        );
-    }
-
-    public static function instance(): self
-    {
-        if (!self::$instance) {
-            self::$instance = new self();
+            self::$logger->pushHandler(
+                new StreamHandler(implode(DIRECTORY_SEPARATOR, $pathParts), MonologLogger::INFO)
+            );
         }
-
-        return self::$instance;
     }
 
     public function warning(string $msg)
     {
-        $this->logger->warning($msg);
+        self::$logger->warning($msg);
     }
 
     public function info(string $msg)
     {
-        $this->logger->info($msg);
+        self::$logger->info($msg);
     }
 }
