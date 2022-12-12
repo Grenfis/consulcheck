@@ -6,7 +6,7 @@ use app\modules\common\IDB;
 use app\modules\users\IUserRepository;
 use app\modules\users\User;
 
-class UserGateway implements IUserRepository
+class UserRepository implements IUserRepository
 {
     private IDB $db;
 
@@ -32,5 +32,19 @@ class UserGateway implements IUserRepository
             ':is_active' => $user->isActive(),
             ':created_at' => $user->createdAt()->format('Y-m-d H:i:s')
         ]);
+    }
+
+    public function exists(int $userId): bool
+    {
+        $query = "
+            SELECT user_id FROM users WHERE user_id = :user_id;
+        ";
+
+        $this->db->prepare($query);
+        $this->db->execute([
+            ':user_id' => $userId,
+        ]);
+
+        return $this->db->result()['user_id'] !== null;
     }
 }

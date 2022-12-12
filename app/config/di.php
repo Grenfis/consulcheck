@@ -7,7 +7,8 @@ return [
 
     \app\modules\checker\ISeleniumGateway::class => \app\modules\checker\infrastructure\SeleniumGateway::class,
 
-    \app\modules\users\IUserRepository::class => \app\modules\users\infrastructure\UserGateway::class,
+    \app\modules\users\IUserRepository::class => \app\modules\users\infrastructure\UserRepository::class,
+    \app\modules\users\IGateway::class => \app\modules\users\infrastructure\Gateway::class,
 
     \app\modules\bot\ITelegramGateway::class => \app\modules\bot\infrastructure\TelegramGateway::class,
     \app\modules\bot\IGateway::class => \app\modules\bot\infrastructure\Gateway::class,
