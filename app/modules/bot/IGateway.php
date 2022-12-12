@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\telegram;
+namespace app\modules\bot;
 
 interface IGateway
 {

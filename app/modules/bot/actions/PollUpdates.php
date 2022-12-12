@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\telegram\actions;
+namespace app\modules\bot\actions;
 
 use app\modules\common\events\EventsDispatcher;
 use app\modules\common\events\LogMessage;
-use app\modules\telegram\ITelegramGateway;
+use app\modules\bot\ITelegramGateway;
 
 class PollUpdates
 {

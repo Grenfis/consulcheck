@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\telegram\infrastructure;
+namespace app\modules\bot\infrastructure;
 
 use app\modules\common\IDB;
-use app\modules\telegram\IGateway;
+use app\modules\bot\IGateway;
 
 class Gateway implements IGateway
 {

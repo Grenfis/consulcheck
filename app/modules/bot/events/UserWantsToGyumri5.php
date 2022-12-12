@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\telegram\events;
+namespace app\modules\bot\events;
 
 use app\modules\common\events\IEvent;
 
-class UserWantsToErevan implements IEvent
+class UserWantsToGyumri5 implements IEvent
 {
     private int $userId;
 

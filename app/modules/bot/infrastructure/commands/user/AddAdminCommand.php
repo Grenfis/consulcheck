@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\telegram\infrastructure\commands\user;
+namespace app\modules\bot\infrastructure\commands\user;
 
 use app\modules\common\events\EventsDispatcher;
 use app\modules\common\events\LogMessage;
-use app\modules\telegram\events\NewAdminUserAppears;
+use app\modules\bot\events\NewAdminUserAppears;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;

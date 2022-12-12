@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\telegram\events;
+namespace app\modules\bot\events;
 
 use app\modules\common\events\IEvent;
 

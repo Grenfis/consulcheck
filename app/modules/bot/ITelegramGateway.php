@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\telegram;
+namespace app\modules\bot;
 
-use app\modules\telegram\dto\TelegramGetUpdatesDto;
+use app\modules\bot\dto\TelegramGetUpdatesDto;
 
 interface ITelegramGateway
 {

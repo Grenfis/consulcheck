@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\telegram\infrastructure;
+namespace app\modules\bot\infrastructure;
 
-use app\modules\telegram\dto\TelegramGetUpdatesDto;
-use app\modules\telegram\IGateway;
-use app\modules\telegram\infrastructure\commands\user\AddAdminCommand;
-use app\modules\telegram\infrastructure\commands\user\StartCommand;
-use app\modules\telegram\ITelegramGateway;
+use app\modules\bot\dto\TelegramGetUpdatesDto;
+use app\modules\bot\IGateway;
+use app\modules\bot\infrastructure\commands\user\AddAdminCommand;
+use app\modules\bot\infrastructure\commands\user\StartCommand;
+use app\modules\bot\ITelegramGateway;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 
