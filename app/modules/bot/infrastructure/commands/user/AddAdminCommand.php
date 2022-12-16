@@ -40,8 +40,6 @@ class AddAdminCommand extends UserCommand
 
         $userId = $message->getFrom()->getId();
         $userName = $message->getFrom()->getUsername();
-        $firstName = $message->getFrom()->getFirstName();
-        $lastName = $message->getFrom()->getLastName();
 
         $chatId = $message->getChat()->getId();
 
@@ -54,9 +52,7 @@ class AddAdminCommand extends UserCommand
             ];
             $this->dispatcher->emit(new NewAdminUserAppears(
                 $userId,
-                $userName,
-                empty($firstName) ? null : $firstName,
-                empty($lastName) ? null : $lastName
+                $userName
             ));
             return Request::sendMessage($response);
         }

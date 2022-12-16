@@ -2,7 +2,7 @@
 
 namespace app\modules\users;
 
-interface IUserRepository
+interface IRepository
 {
     public function add(User $user);
     public function exists(int $userId): bool;

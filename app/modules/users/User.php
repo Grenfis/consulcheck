@@ -2,35 +2,27 @@
 
 namespace app\modules\users;
 
-use DateTime;
+use DateTimeImmutable;
 
 class User
 {
     private int $userId;
     private string $userName;
-    private ?string $firstName;
-    private ?string $lastName;
     private bool $isAdmin;
     private bool $isActive;
-    private DateTime $createdAt;
+    private DateTimeImmutable $createdAt;
 
     public function __construct(
         int $userId,
         string $userName,
-        ?string $firstName,
-        ?string $lastName,
-        bool $isAdmin,
-        bool $isActive,
-        DateTime $createdAt
+        bool $isAdmin
     )
     {
         $this->userId = $userId;
         $this->userName = $userName;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
         $this->isAdmin = $isAdmin;
-        $this->isActive = $isActive;
-        $this->createdAt = $createdAt;
+        $this->isActive = true;
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function userId(): int
@@ -43,16 +35,6 @@ class User
         return $this->userName;
     }
 
-    public function firstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function lastName(): ?string
-    {
-        return $this->lastName;
-    }
-
     public function isAdmin(): bool
     {
         return $this->isAdmin;
@@ -63,7 +45,7 @@ class User
         return $this->isActive;
     }
 
-    public function createdAt(): DateTime
+    public function createdAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
