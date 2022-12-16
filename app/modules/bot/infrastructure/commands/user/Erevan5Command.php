@@ -36,8 +36,9 @@ class Erevan5Command extends UserCommand
         $message = $this->getMessage();
         $chatId = $message->getChat()->getId();
         $userId = $message->getFrom()->getId();
+        $userName = $message->getFrom()->getUsername();
 
-        $this->dispatcher->emit(new UserWantsToErevan($userId));
+        $this->dispatcher->emit(new UserWantsToErevan($userId, $userName));
 
         return Request::sendMessage([
             'chat_id' => $chatId,
