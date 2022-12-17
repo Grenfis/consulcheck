@@ -40,7 +40,7 @@ class TelegramGateway implements ITelegramGateway
         $this->telegram->addCommandClass(Gyumri10Command::class);
 
         $adminsIds = $gateway->getAdminIds();
-        $this->telegram->enableAdmins($adminsIds);
+       // $this->telegram->enableAdmins($adminsIds);
     }
 
     /**

@@ -24,6 +24,7 @@ final class UsersQueue extends AbstractMigration
             ->addColumn('created_at', 'timestamp', ['null' => false])
             ->addForeignKey('user_id', 'users', 'user_id', ['delete' => 'CASCADE'])
             ->addForeignKey('queue_id', 'queues', 'queue_id', ['delete' => 'CASCADE'])
+            ->addIndex(['user_id', 'queue_id'], ['unique' => true])
             ->create();
     }
 }

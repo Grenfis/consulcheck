@@ -5,7 +5,7 @@ namespace app\modules\bot\events;
 class UserWantsToErevan
 {
     private int $userId;
-    private int $userName;
+    private string $userName;
 
     public function __construct(int $userId, string $userName)
     {
@@ -18,7 +18,7 @@ class UserWantsToErevan
         return $this->userId;
     }
 
-    public function userName(): int
+    public function userName(): string
     {
         return $this->userName;
     }

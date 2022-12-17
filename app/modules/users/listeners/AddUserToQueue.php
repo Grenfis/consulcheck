@@ -48,6 +48,10 @@ class AddUserToQueue
             throw new \RuntimeException("Пользователя $userId не существует!");
         }
 
-        $this->gateway->addUserToQueue($userId, $queueId);
+        try {
+            $this->gateway->addUserToQueue($userId, $queueId);
+        } catch (\Exception $e) {
+
+        }
     }
 }
