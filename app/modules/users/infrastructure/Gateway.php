@@ -26,4 +26,19 @@ class Gateway implements IGateway
             ':user_id' => $userId,
         ]);
     }
+
+    public function addUserToQueue(int $userId, int $queueId)
+    {
+        $query = "
+            INSERT INTO users_queue(user_id, queue_id, created_at)
+            VALUES (:uid, :qid, :created_at);
+        ";
+
+        $this->db->prepare($query);
+        $this->db->execute([
+            ':uid' => $userId,
+            ':qid' => $queueId,
+            ':created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
+        ]);
+    }
 }
