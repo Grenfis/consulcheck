@@ -2,9 +2,9 @@
 
 namespace app\modules\bot\infrastructure\commands\user;
 
-use app\modules\bot\events\NewAdminUserAppears;
+require_once __DIR__ . '/../constants.php';
+
 use app\modules\common\DI;
-use app\modules\common\IEventDispatcher;
 use app\modules\common\ILogger;
 use Auryn\InjectionException;
 use Longman\TelegramBot\Commands\UserCommand;
@@ -15,13 +15,12 @@ use Longman\TelegramBot\Telegram;
 
 class AddAdminCommand extends UserCommand
 {
-    protected $name = 'i_am_admin';
+    protected $name = ADD_ADMIN_COMMAND_NAME;
     protected $description = 'Стать администратором проекта';
-    protected $usage = '/i_am_admin';
+    protected $usage = '/' . ADD_ADMIN_COMMAND_NAME;
     protected $version = '1.0.0';
 
     private ILogger $logger;
-    private IEventDispatcher $dispatcher;
 
     /**
      * @throws InjectionException
@@ -29,7 +28,6 @@ class AddAdminCommand extends UserCommand
     public function __construct(Telegram $telegram, ?Update $update = null)
     {
         $this->logger = DI::instance()->make(ILogger::class);
-        $this->dispatcher = DI::instance()->make(IEventDispatcher::class);
 
         parent::__construct($telegram, $update);
     }
@@ -50,10 +48,7 @@ class AddAdminCommand extends UserCommand
                 'chat_id' => $chatId,
                 'text' => 'Вы теперь новый администратор.'
             ];
-            $this->dispatcher->emit(new NewAdminUserAppears(
-                $userId,
-                $userName
-            ));
+            $this->getConfig(ADD_NEW_ADMIN_FUNC)($userId, $userName);
             return Request::sendMessage($response);
         }
 

@@ -2,6 +2,8 @@
 
 namespace app\modules\bot\infrastructure\commands\user;
 
+require_once __DIR__ . '/../constants.php';
+
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Request;
@@ -10,9 +12,9 @@ use PhpTelegramBot\FluentKeyboard\ReplyKeyboard\ReplyKeyboardMarkup;
 
 class StartCommand extends UserCommand
 {
-    protected $name = 'start';
+    protected $name = START_COMMAND_NAME;
     protected $description = 'Меню';
-    protected $usage = '/start';
+    protected $usage = '/' . START_COMMAND_NAME;
     protected $version = '1.0.0';
 
     public function execute(): ServerResponse

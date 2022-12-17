@@ -2,10 +2,8 @@
 
 namespace app\modules\bot\infrastructure\commands\user;
 
-use app\modules\bot\events\UserWantsToGyumri5;
-use app\modules\common\DI;
-use app\modules\common\IEventDispatcher;
-use Auryn\InjectionException;
+require_once __DIR__ . '/../constants.php';
+
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Entities\Update;
@@ -14,20 +12,14 @@ use Longman\TelegramBot\Telegram;
 
 class Gyumri5Command extends UserCommand
 {
-    protected $name = 'gyumri_5';
+    protected $name = GYUMRI_5_COMMAND_NAME;
     protected $description = 'Запись в Гюмри на 5 лет';
-    protected $usage = '/gyumri_5';
+    protected $usage = '/' . GYUMRI_5_COMMAND_NAME;
     protected $version = '1.0.0';
 
-    private IEventDispatcher $dispatcher;
 
-    /**
-     * @throws InjectionException
-     */
     public function __construct(Telegram $telegram, ?Update $update = null)
     {
-        $this->dispatcher = DI::instance()->make(IEventDispatcher::class);
-
         parent::__construct($telegram, $update);
     }
 
@@ -38,7 +30,7 @@ class Gyumri5Command extends UserCommand
         $userId = $message->getFrom()->getId();
         $userName = $message->getFrom()->getUsername();
 
-        $this->dispatcher->emit(new UserWantsToGyumri5($userId, $userName));
+        $this->getConfig(ADD_TO_QUEUE_FUNC)($userId, $userName, 'gyumri_5');
 
         return Request::sendMessage([
             'chat_id' => $chatId,
