@@ -12,4 +12,7 @@ return [
 
     \app\modules\bot\ITelegramGateway::class => \app\modules\bot\infrastructure\TelegramGateway::class,
     \app\modules\bot\IGateway::class => \app\modules\bot\infrastructure\Gateway::class,
+
+    \app\modules\checker\IErevanGateway::class => \app\modules\checker\infrastructure\ErevanGateway::class,
+    \app\modules\checker\IGyumriGateway::class => \app\modules\checker\infrastructure\GyumriGateway::class,
 ];

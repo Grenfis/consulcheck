@@ -23,7 +23,7 @@ class Cron extends Controller
     /**
      * @throws InjectionException
      */
-    public function checkerCheck()
+    public function checker()
     {
         /** @var AvailabilityCheck $action */
         $action = DI::instance()->make(AvailabilityCheck::class);

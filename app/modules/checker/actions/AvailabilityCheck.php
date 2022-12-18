@@ -2,18 +2,23 @@
 
 namespace app\modules\checker\actions;
 
-use app\modules\checker\ISeleniumGateway;
+
+use app\modules\checker\IErevanGateway;
+use app\modules\checker\IGyumriGateway;
 
 class AvailabilityCheck
 {
-    private ISeleniumGateway $gateway;
+    private IErevanGateway $erevanGateway;
+    private IGyumriGateway $gyumriGateway;
 
-    public function __construct(ISeleniumGateway $gateway)
+    public function __construct(IErevanGateway $erevanGateway, IGyumriGateway $gyumriGateway)
     {
-        $this->gateway = $gateway;
+        $this->erevanGateway = $erevanGateway;
+        $this->gyumriGateway = $gyumriGateway;
     }
 
     public function check()
     {
+
     }
 }
