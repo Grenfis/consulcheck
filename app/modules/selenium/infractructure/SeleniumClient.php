@@ -1,20 +1,18 @@
 <?php
 
-namespace app\modules\checker\infrastructure;
+namespace app\modules\selenium\infractructure;
 
-use app\modules\checker\ISeleniumGateway;
+use app\modules\selenium\ISeleniumClient;
 use Facebook\WebDriver\Exception\UnsupportedOperationException;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 
-class SeleniumGateway implements ISeleniumGateway
+class SeleniumClient implements ISeleniumClient
 {
     private RemoteWebDriver $driver;
-    private array $windowHandles;
 
     public function __construct()
     {
-        $this->windowHandles = [];
         $this->initDriver();
     }
 

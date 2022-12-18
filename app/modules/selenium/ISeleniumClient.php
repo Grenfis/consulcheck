@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\checker;
+namespace app\modules\selenium;
 
-interface ISeleniumGateway
+interface ISeleniumClient
 {
     public function openTab(string $url): string;
 }
