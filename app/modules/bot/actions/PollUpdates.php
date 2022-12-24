@@ -2,6 +2,8 @@
 
 namespace app\modules\bot\actions;
 
+use app\modules\bot\events\DDGSolutionWasReceived;
+use app\modules\bot\events\GeneralSolutionWasReceived;
 use app\modules\bot\events\NewAdminUsersAppears;
 use app\modules\bot\events\UsersWantsToQueue;
 use app\modules\bot\ITelegramGateway;
@@ -34,6 +36,14 @@ class PollUpdates
 
         if (count($result->usersToQueue) > 0) {
             $this->dispatcher->emit(new UsersWantsToQueue($result->usersToQueue));
+        }
+
+        if (count($result->solveDDG) > 0) {
+            $this->dispatcher->emit(new DDGSolutionWasReceived($result->solveDDG));
+        }
+
+        if (count($result->solveGeneral) > 0) {
+            $this->dispatcher->emit(new GeneralSolutionWasReceived($result->solveGeneral));
         }
     }
 }

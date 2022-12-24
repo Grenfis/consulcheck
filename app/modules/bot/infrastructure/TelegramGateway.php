@@ -9,6 +9,7 @@ use app\modules\bot\dto\TelegramGetUpdatesDto;
 use app\modules\bot\IGateway;
 use app\modules\bot\ITelegramGateway;
 use Longman\TelegramBot\Exception\TelegramException;
+use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
 
 class TelegramGateway implements ITelegramGateway
@@ -16,6 +17,9 @@ class TelegramGateway implements ITelegramGateway
     private Telegram $telegram;
     private array $toQueue;
     private array $newAdmins;
+    private array $solveDDG;
+
+    private array $solveGeneralCaptcha;
 
     /**
      * @throws TelegramException
@@ -24,6 +28,8 @@ class TelegramGateway implements ITelegramGateway
     {
         $this->toQueue = [];
         $this->newAdmins = [];
+        $this->solveDDG = [];
+        $this->solveGeneralCaptcha = [];
 
         $mysqlConfig = [
             'host' => DB_HOST,
@@ -37,8 +43,8 @@ class TelegramGateway implements ITelegramGateway
         $this->telegram->enableMySql($mysqlConfig, 'tg_');
         $this->initTelegramCommands();
 
-//        $adminsIds = $gateway->getAdminIds();
-//        $this->telegram->enableAdmins($adminsIds);
+        $adminsIds = $gateway->getAdminIds();
+        $this->telegram->enableAdmins($adminsIds);
     }
 
     private function initTelegramCommands()
@@ -53,12 +59,28 @@ class TelegramGateway implements ITelegramGateway
                         'queue' => $queue,
                     ];
                 },
+
                 ADD_NEW_ADMIN_FUNC => function(int $userId, string $userName) {
                     $this->newAdmins[] = [
                         'user_id' => $userId,
                         'user_name' => $userName,
                     ];
                 },
+
+                SOLVE_DDG_CAPTCHA => function(int $userId, string $text) {
+                    $this->solveDDG[] = [
+                        'user_id' => $userId,
+                        'text' => $text,
+                    ];
+                },
+
+                SOLVE_GENERAL_CAPTCHA => function(int $userId, string $text, string $dest) {
+                    $this->solveGeneralCaptcha[] = [
+                        'user_id' => $userId,
+                        'text' => $text,
+                        'dest' => $dest,
+                    ];
+                }
             ]);
         }
     }
@@ -74,7 +96,44 @@ class TelegramGateway implements ITelegramGateway
             $result->isOk(),
             $result->getDescription() ?: '',
             $this->newAdmins,
-            $this->toQueue
+            $this->toQueue,
+            $this->solveDDG,
+            $this->solveGeneralCaptcha
         );
+    }
+
+    public function sendDDGMessageToAdmins(string $captchaPath)
+    {
+        $adminsIds = $this->telegram->getAdminList();
+        foreach ($adminsIds as $id) {
+            Request::sendDocument([
+                'chat_id' => $id,
+                'document' => $captchaPath,
+                'caption' => 'DDG каптча. Для ответа введите /ddg'
+            ]);
+        }
+    }
+
+    public function sendGyumri5CaptchaMessageToAdmin(string $captchaPath)
+    {
+        $adminsIds = $this->telegram->getAdminList();
+        foreach ($adminsIds as $id) {
+            Request::sendDocument([
+                'chat_id' => $id,
+                'document' => $captchaPath,
+                'caption' => 'Гюмри 5 лет каптча. Для ответа введите /g5c'
+            ]);
+        }
+    }
+
+    public function sendDocumentToUsers(string $caption, string $path, int ...$users)
+    {
+        foreach ($users as $user) {
+            Request::sendDocument([
+                'chat_id' => $user,
+                'document' => $path,
+                'caption' => $caption
+            ]);
+        }
     }
 }

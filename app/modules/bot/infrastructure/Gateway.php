@@ -27,4 +27,20 @@ class Gateway implements IGateway
         $data = $this->db->results();
         return array_map(static fn(array $row) => $row['user_id'], $data ?: []);
     }
+
+    public function getQueueUsers(int $queueType): array
+    {
+        $query = "
+            SELECT user_id
+            FROM users_queue
+            WHERE queue_id = :queue_id;
+        ";
+
+        $this->db->prepare($query);
+        $this->db->execute([
+            ':queue_id' => $queueType,
+        ]);
+
+        return array_map(static fn(array $row) => $row['user_id'], $this->db->results());
+    }
 }
