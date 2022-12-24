@@ -28,4 +28,10 @@ class EventDispatcher implements IEventDispatcher
     {
         self::$dispatcher->dispatch($event);
     }
+
+    public function emits(object ...$events)
+    {
+        $generator = new EventsGenerator(...$events);
+        self::$dispatcher->dispatchGeneratedEvents($generator);
+    }
 }
