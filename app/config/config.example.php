@@ -16,4 +16,5 @@ const DB_USER = '';
 const DB_PASSWORD = '';
 
 const CAPTCHAS_DIR = '/var/www/php/captchas';
+const AVAILABLE_PLACES_DIR = '/var/www/php/available_places';
 const GYUMRI_5_URL = '';

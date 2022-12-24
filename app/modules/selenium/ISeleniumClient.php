@@ -21,4 +21,10 @@ interface ISeleniumClient
     public function takeElementScreenshot(string $selector, string $filePath);
 
     public function getHtml(string $selector): string;
+
+    public function getText(string $selector): string;
+
+    public function enterText(string $selector, string $text);
+
+    public function reload();
 }

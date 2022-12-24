@@ -61,17 +61,27 @@ class SeleniumClient implements ISeleniumClient
      */
     public function openTab(string $url): Handler
     {
-        $handle = $this->getTabHandle($url);
+        $handlersFile = '/tmp/selenium_handlers.txt';
+        $fileContent = '{}';
+        if (file_exists($handlersFile)) {
+            $fileContent = file_get_contents($handlersFile);
+        }
+        $handles = json_decode($fileContent, true);
+
+        $handle = $handles[$url] ?? null;
 
         if (!$handle) {
-            $window = $this->driver->switchTo()->newWindow();
-            $this->get($url);
-            return new Handler(
-                $window->getWindowHandle()
-            );
+            return $this->getTabHandle($url, $handles, $handlersFile);
         }
 
-        return $handle;
+        try {
+            $this->driver->switchTo()->window($handle);
+            return new Handler(
+                $handle
+            );
+        } catch (\Exception $e) {
+            return $this->getTabHandle($url, $handles, $handlersFile);
+        }
     }
 
     /**
@@ -138,19 +148,48 @@ class SeleniumClient implements ISeleniumClient
         return $this->driver->findElement(WebDriverBy::cssSelector($selector))->getDomProperty('innerHTML');
     }
 
-    private function getTabHandle(string $url): ?Handler
+    /**
+     * @throws UnknownErrorException
+     * @throws UnsupportedOperationException
+     */
+    public function getText(string $selector): string
     {
-        $handles = $this->driver->getWindowHandles() ?: [];
-        foreach($handles as $handle) {
-            $window = $this->driver->switchTo()->window($handle);
-            if (strpos($window->getCurrentURL(), $url) !== false) {
-                return new Handler(
-                    $handle
-                );
-            }
-        }
+        return $this->driver->findElement(WebDriverBy::cssSelector($selector))->getDomProperty('innerText');
+    }
 
-        return null;
+    /**
+     * @throws UnknownErrorException
+     */
+    public function enterText(string $selector, string $text)
+    {
+        $element = $this->driver->findElement(WebDriverBy::cssSelector($selector));
+        $element->clear();
+        $element->sendKeys($text);
+    }
+
+    public function reload()
+    {
+        $this->driver->navigate()->refresh();
+    }
+
+    /**
+     * @throws UnsupportedOperationException
+     * @throws \Exception
+     */
+    private function getTabHandle(string $url, array $handles, string $file): Handler
+    {
+        $window = $this->driver->switchTo()->newWindow();
+        $this->get($url);
+
+        $handle = $window->getWindowHandle();
+        $handles[$url] = $handle;
+
+        $json = json_encode($handles);
+        file_put_contents($file, $json);
+
+        return new Handler(
+            $handle
+        );
     }
 
     /**
