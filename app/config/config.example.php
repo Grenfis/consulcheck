@@ -14,3 +14,6 @@ const DB_PORT = '';
 const DB_DATABASE = '';
 const DB_USER = '';
 const DB_PASSWORD = '';
+
+const CAPTCHAS_DIR = '/var/www/php/captchas';
+const GYUMRI_5_URL = '';
