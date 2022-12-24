@@ -19,6 +19,7 @@
         "robmorgan/phinx": "^0.13.3",
         "league/event": "^3.0",
         "monolog/monolog": "^2.8",
-        "php-telegram-bot/fluent-keyboard": "^1.0"
+        "php-telegram-bot/fluent-keyboard": "^1.0",
+        "campo/random-user-agent": "^1.3"
     }
 }

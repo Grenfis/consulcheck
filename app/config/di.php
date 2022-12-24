@@ -5,7 +5,7 @@ return [
     \app\modules\common\ILogger::class => \app\modules\logger\Logger::class,
     \app\modules\common\IEventDispatcher::class => \app\modules\events\EventDispatcher::class,
 
-    \app\modules\selenium\ISeleniumClient::class => \app\modules\selenium\infractructure\SeleniumClient::class,
+    \app\modules\selenium\ISeleniumClient::class => \app\modules\selenium\infrastructure\SeleniumClient::class,
 
     \app\modules\users\IRepository::class => \app\modules\users\infrastructure\Repository::class,
     \app\modules\users\IGateway::class => \app\modules\users\infrastructure\Gateway::class,

@@ -17,6 +17,10 @@ up:
 down:
 	$(docker_compose) down
 
+restart:
+	$(docker_compose) down
+	$(docker_compose) up -d
+
 ps:
 	$(docker_compose) ps
 

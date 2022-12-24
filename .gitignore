@@ -5,3 +5,4 @@ docker/logs
 /vendor/
 app/config/config.php
 logs
+captchas
