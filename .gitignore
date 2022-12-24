@@ -6,3 +6,4 @@ docker/logs
 app/config/config.php
 logs
 captchas
+available_places

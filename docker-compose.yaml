@@ -53,6 +53,7 @@ services:
       - ${SRC_PATH}/vendor:/var/www/php/vendor:rw
       - ${SRC_PATH}/logs:/var/www/php/logs:rw
       - ${SRC_PATH}/captchas:/var/www/php/captchas:rw
+      - ${SRC_PATH}/available_places:/var/www/php/available_places:rw
 
       - ${SRC_PATH}/docker/php/php.ini:/usr/local/etc/php/php.ini:ro
       - ${SRC_PATH}/docker/php/fpm/pool.d/app.conf:/usr/local/etc/php-fpm.d/app.conf:ro
