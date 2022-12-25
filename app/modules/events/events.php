@@ -31,4 +31,10 @@ return [
     \app\modules\checker\events\Gyumri10WasFindPlaces::class => [
         \app\modules\bot\listeners\Gyumri10SendPlaces::class,
     ],
+    \app\modules\checker\events\ErevanCaptchaWasFound::class => [
+        \app\modules\bot\listeners\SolveErevanCaptcha::class,
+    ],
+    \app\modules\checker\events\ErevanWasFindPlaces::class => [
+        \app\modules\bot\listeners\ErevanSendPlaces::class,
+    ],
 ];
