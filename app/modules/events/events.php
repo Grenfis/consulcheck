@@ -25,4 +25,10 @@ return [
     \app\modules\checker\events\Gyumri5WasFindPlaces::class => [
         \app\modules\bot\listeners\Gyumri5SendPlaces::class,
     ],
+    \app\modules\checker\events\Gyumri10CaptchaWasFound::class => [
+        \app\modules\bot\listeners\SolveGyumri10Captcha::class,
+    ],
+    \app\modules\checker\events\Gyumri10WasFindPlaces::class => [
+        \app\modules\bot\listeners\Gyumri10SendPlaces::class,
+    ],
 ];
