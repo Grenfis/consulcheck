@@ -46,6 +46,8 @@ class SeleniumClient implements ISeleniumClient
             '--disable-blink-features=AutomationControlled',
             '--disable-plugins-discovery',
             '--disable-extensions',
+            '--headless',
+            'window-size=1920,1080'
         ]);
 
         $capabilities = new DesiredCapabilities();

@@ -80,7 +80,7 @@ class GyumriGateway implements IGyumriGateway
 
     public function enterGeneralCaptcha(string $text)
     {
-        $this->client->switchToWindow($this->tabHandler);
+       // $this->client->switchToWindow($this->tabHandler);
         $this->client->enterText('#ctl00_MainContent_txtCode', $text);
         $this->client->click('#ctl00_MainContent_ButtonA');
     }
