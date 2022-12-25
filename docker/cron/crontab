@@ -9,3 +9,4 @@
 #17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
 #25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
 * *    * * *      /usr/bin/curl --silent "http://10.5.0.5/api/system/cron/telegramGetUpdates" &>/dev/null
+*/10 *    * * *      /usr/bin/curl --silent "http://10.5.0.5/api/system/cron/checker" &>/dev/null
