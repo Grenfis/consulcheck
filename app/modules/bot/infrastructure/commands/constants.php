@@ -10,6 +10,7 @@ const START_COMMAND_NAME = 'start';
 const DDG_COMMAND_NAME = 'ddg';
 const G5_CAPTCHA_COMMAND_NAME = 'g5c';
 const G10_CAPTCHA_COMMAND_NAME = 'g10c';
+const E5_CAPTCHA_COMMAND_NAME = 'ec';
 
 const ADD_TO_QUEUE_FUNC = 'addToQueue';
 const ADD_NEW_ADMIN_FUNC = 'addAdmin';

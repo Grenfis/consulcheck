@@ -14,5 +14,7 @@ interface ITelegramGateway
 
     public function sendGyumri10CaptchaMessageToAdmin(string $captchaPath);
 
+    public function sendErevanCaptchaMessageToAdmin(string $captchaPath);
+
     public function sendDocumentToUsers(string $caption, string $path, int ...$users);
 }

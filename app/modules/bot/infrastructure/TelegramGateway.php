@@ -121,7 +121,7 @@ class TelegramGateway implements ITelegramGateway
             Request::sendDocument([
                 'chat_id' => $id,
                 'document' => $captchaPath,
-                'caption' => 'Гюмри 5 лет каптча. Для ответа введите /g5c'
+                'caption' => 'Гюмри 5 лет каптча. Для ответа введите /g5c XXXXXX'
             ]);
         }
     }
@@ -144,7 +144,19 @@ class TelegramGateway implements ITelegramGateway
             Request::sendDocument([
                 'chat_id' => $id,
                 'document' => $captchaPath,
-                'caption' => 'Гюмри 10 лет каптча. Для ответа введите /g10c'
+                'caption' => 'Гюмри 10 лет каптча. Для ответа введите /g10c XXXXXX'
+            ]);
+        }
+    }
+
+    public function sendErevanCaptchaMessageToAdmin(string $captchaPath)
+    {
+        $adminsIds = $this->telegram->getAdminList();
+        foreach ($adminsIds as $id) {
+            Request::sendDocument([
+                'chat_id' => $id,
+                'document' => $captchaPath,
+                'caption' => 'Ереван 5 лет каптча. Для ответа введите /ec XXXXXX'
             ]);
         }
     }
