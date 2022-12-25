@@ -3,6 +3,8 @@
 namespace app\modules\checker;
 
 use app\modules\checker\events\DDOSCaptchaWasFound;
+use app\modules\checker\events\ErevanCaptchaWasFound;
+use app\modules\checker\events\ErevanWasFindPlaces;
 use app\modules\checker\events\Gyumri10CaptchaWasFound;
 use app\modules\checker\events\Gyumri10WasFindPlaces;
 use app\modules\checker\events\Gyumri5CaptchaWasFound;
@@ -26,6 +28,23 @@ class CheckerService
         $this->erevanGateway = $erevanGateway;
         $this->gyumri5Gateway = $gyumri5Gateway;
         $this->gyumri10Gateway = $gyumri10Gateway;
+    }
+
+    public function check()
+    {
+        $result = $this->checkDDOSCaptcha();
+
+        if ($result) {
+            $result = $this->checkGyumri5();
+        }
+
+        if ($result) {
+            $result = $this->checkGyumri10();
+        }
+
+        if ($result) {
+            $this->checkErevan();
+        }
     }
 
     public function checkGyumri5(): bool
@@ -70,7 +89,28 @@ class CheckerService
         return true;
     }
 
-    public function checkDDOSCaptcha()
+    public function checkErevan(): bool
+    {
+        $this->erevanGateway->openTab(EREVAN_URL);
+
+        $path = $this->erevanGateway->findGeneralCaptcha();
+        if ($path) {
+            $this->emit(new ErevanCaptchaWasFound($path));
+            return false;
+        }
+
+        $this->erevanGateway->makeAnAppointment();
+
+        $this->erevanGateway->reloadTab();
+        $checkResult = $this->erevanGateway->checkAnchor();
+        if ($checkResult) {
+            $this->emit(new ErevanWasFindPlaces($checkResult));
+        }
+
+        return true;
+    }
+
+    public function checkDDOSCaptcha(): bool
     {
         $this->gyumri5Gateway->openTab(GYUMRI_5_URL);
 

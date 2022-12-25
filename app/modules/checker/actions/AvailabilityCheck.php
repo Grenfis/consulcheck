@@ -22,15 +22,7 @@ class AvailabilityCheck
 
     public function check()
     {
-        $result = $this->service->checkDDOSCaptcha();
-
-        if ($result) {
-            $result = $this->service->checkGyumri5();
-        }
-
-        if ($result) {
-            $result = $this->service->checkGyumri10();
-        }
+        $this->service->check();;
 
         $this->dispatcher->emits(...$this->service->events());
     }

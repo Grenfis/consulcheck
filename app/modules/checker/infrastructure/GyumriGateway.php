@@ -89,6 +89,7 @@ class GyumriGateway implements IGyumriGateway
     {
         $this->client->switchToWindow($this->tabHandler);
         try {
+            $this->client->waitPresence('#ctl00_MainContent_ButtonB');
             $this->client->click('#ctl00_MainContent_ButtonB');
         } catch (\Exception $e) {
 
@@ -114,6 +115,7 @@ class GyumriGateway implements IGyumriGateway
 
     public function reloadTab()
     {
+        $this->client->switchToWindow($this->tabHandler);
         $this->client->reload();
     }
 }

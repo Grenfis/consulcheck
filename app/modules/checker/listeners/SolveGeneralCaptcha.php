@@ -3,7 +3,6 @@
 namespace app\modules\checker\listeners;
 
 use app\modules\bot\events\GeneralSolutionWasReceived;
-use app\modules\checker\CheckerService;
 use app\modules\checker\IErevanGateway;
 use app\modules\checker\IGyumriGateway;
 
@@ -39,6 +38,8 @@ class SolveGeneralCaptcha
                     $this->g10gateway->enterGeneralCaptcha($solution['text']);
                     break;
                 case 'e':
+                    $this->erevanGateway->openTab(EREVAN_URL);
+                    $this->erevanGateway->enterGeneralCaptcha($solution['text']);
                     break;
             }
 
