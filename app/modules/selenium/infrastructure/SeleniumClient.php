@@ -178,6 +178,10 @@ class SeleniumClient implements ISeleniumClient
      */
     private function getTabHandle(string $url, array $handles, string $file): Handler
     {
+        $existsHandlers = $this->driver->getWindowHandles();
+        if (count($existsHandlers) > 0) {
+            $this->driver->switchTo()->window($existsHandlers[0]);
+        }
         $window = $this->driver->switchTo()->newWindow();
         $this->get($url);
 
