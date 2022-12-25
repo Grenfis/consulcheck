@@ -32,12 +32,6 @@ class CheckerService
     {
         $this->gyumri5Gateway->openTab(GYUMRI_5_URL);
 
-        $path = $this->gyumri5Gateway->findDDOSCaptcha();
-        if ($path) {
-            $this->emit(new DDOSCaptchaWasFound($path));
-            return false;
-        }
-
         $path = $this->gyumri5Gateway->findGeneralCaptcha();
         if ($path) {
             $this->emit(new Gyumri5CaptchaWasFound($path));
@@ -71,6 +65,19 @@ class CheckerService
         $checkResult = $this->gyumri10Gateway->checkAnchor();
         if ($checkResult) {
             $this->emit(new Gyumri10WasFindPlaces($checkResult));
+        }
+
+        return true;
+    }
+
+    public function checkDDOSCaptcha()
+    {
+        $this->gyumri5Gateway->openTab(GYUMRI_5_URL);
+
+        $path = $this->gyumri5Gateway->findDDOSCaptcha();
+        if ($path) {
+            $this->emit(new DDOSCaptchaWasFound($path));
+            return false;
         }
 
         return true;

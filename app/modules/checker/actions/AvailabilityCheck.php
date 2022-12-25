@@ -22,7 +22,12 @@ class AvailabilityCheck
 
     public function check()
     {
-        $result = $this->service->checkGyumri5();
+        $result = $this->service->checkDDOSCaptcha();
+
+        if ($result) {
+            $result = $this->service->checkGyumri5();
+        }
+
         if ($result) {
             $result = $this->service->checkGyumri10();
         }
