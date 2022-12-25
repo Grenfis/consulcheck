@@ -17,4 +17,7 @@ const DB_PASSWORD = '';
 
 const CAPTCHAS_DIR = '/var/www/php/captchas';
 const AVAILABLE_PLACES_DIR = '/var/www/php/available_places';
+
 const GYUMRI_5_URL = '';
+const GYUMRI_10_URL = '';
+const EREVAN_URL = '';
