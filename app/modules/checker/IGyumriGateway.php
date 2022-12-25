@@ -4,6 +4,7 @@ namespace app\modules\checker;
 
 interface IGyumriGateway
 {
+    public function reloadTab();
     public function openTab(string $url);
 
     public function findDDOSCaptcha(): ?string;

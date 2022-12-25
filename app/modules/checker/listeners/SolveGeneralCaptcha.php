@@ -35,8 +35,8 @@ class SolveGeneralCaptcha
                     $this->g5gateway->enterGeneralCaptcha($solution['text']);
                     break;
                 case 'g10':
-//                    $this->g10gateway->openTab(GYUMRI_10_URL);
-//                    $this->g10gateway->enterGeneralCaptcha($solution['text']);
+                    $this->g10gateway->openTab(GYUMRI_10_URL);
+                    $this->g10gateway->enterGeneralCaptcha($solution['text']);
                     break;
                 case 'e':
                     break;

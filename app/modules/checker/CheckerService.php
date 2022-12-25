@@ -3,6 +3,8 @@
 namespace app\modules\checker;
 
 use app\modules\checker\events\DDOSCaptchaWasFound;
+use app\modules\checker\events\Gyumri10CaptchaWasFound;
+use app\modules\checker\events\Gyumri10WasFindPlaces;
 use app\modules\checker\events\Gyumri5CaptchaWasFound;
 use app\modules\checker\events\Gyumri5WasFindPlaces;
 use app\modules\common\EventsTrait;
@@ -44,9 +46,31 @@ class CheckerService
 
         $this->gyumri5Gateway->makeAnAppointment();
 
+        $this->gyumri5Gateway->reloadTab();
         $checkResult = $this->gyumri5Gateway->checkAnchor();
         if ($checkResult) {
             $this->emit(new Gyumri5WasFindPlaces($checkResult));
+        }
+
+        return true;
+    }
+
+    public function checkGyumri10(): bool
+    {
+        $this->gyumri10Gateway->openTab(GYUMRI_10_URL);
+
+        $path = $this->gyumri10Gateway->findGeneralCaptcha();
+        if ($path) {
+            $this->emit(new Gyumri10CaptchaWasFound($path));
+            return false;
+        }
+
+        $this->gyumri10Gateway->makeAnAppointment();
+
+        $this->gyumri10Gateway->reloadTab();
+        $checkResult = $this->gyumri10Gateway->checkAnchor();
+        if ($checkResult) {
+            $this->emit(new Gyumri10WasFindPlaces($checkResult));
         }
 
         return true;

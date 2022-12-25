@@ -22,7 +22,6 @@ class GyumriGateway implements IGyumriGateway
     public function openTab(string $url)
     {
         $this->tabHandler = $this->client->openTab($url);
-        $this->client->reload();
     }
 
     /**
@@ -111,5 +110,10 @@ class GyumriGateway implements IGyumriGateway
         }
 
         return null;
+    }
+
+    public function reloadTab()
+    {
+        $this->client->reload();
     }
 }

@@ -22,7 +22,11 @@ class AvailabilityCheck
 
     public function check()
     {
-        $this->service->checkGyumri5();
+        $result = $this->service->checkGyumri5();
+        if ($result) {
+            $result = $this->service->checkGyumri10();
+        }
+
         $this->dispatcher->emits(...$this->service->events());
     }
 }
