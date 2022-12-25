@@ -3,6 +3,7 @@
 require_once __DIR__ . '/constants.php';
 
 use app\modules\bot\infrastructure\commands\admin\DDGCommand;
+use app\modules\bot\infrastructure\commands\admin\G10Captcha;
 use app\modules\bot\infrastructure\commands\admin\G5Captcha;
 use app\modules\bot\infrastructure\commands\user\AddAdminCommand;
 use app\modules\bot\infrastructure\commands\user\Erevan5Command;
@@ -20,4 +21,5 @@ const TELEGRAM_COMMANDS = [
     // ADMIN
     DDG_COMMAND_NAME => DDGCommand::class,
     G5_CAPTCHA_COMMAND_NAME => G5Captcha::class,
+    G10_CAPTCHA_COMMAND_NAME => G10Captcha::class,
 ];

@@ -136,4 +136,16 @@ class TelegramGateway implements ITelegramGateway
             ]);
         }
     }
+
+    public function sendGyumri10CaptchaMessageToAdmin(string $captchaPath)
+    {
+        $adminsIds = $this->telegram->getAdminList();
+        foreach ($adminsIds as $id) {
+            Request::sendDocument([
+                'chat_id' => $id,
+                'document' => $captchaPath,
+                'caption' => 'Гюмри 10 лет каптча. Для ответа введите /g10c'
+            ]);
+        }
+    }
 }
