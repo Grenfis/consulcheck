@@ -76,11 +76,8 @@ services:
   cli:
     container_name: "${PROJECT_NAME}-cli"
     build:
-      context: ./docker/php/cli
-      args:
-        SUPERCRONIC_VERSION: "0.1.12"
-        SUPERCRONIC_SHA1SUM: "048b95b48b708983effb2e5c935a1ef8483d9e3e"
-        APP_PATH: /var/www/php
+      context: ./
+      dockerfile: ./docker/php/cli/Dockerfile
     restart: unless-stopped
     stdin_open: true
     volumes:

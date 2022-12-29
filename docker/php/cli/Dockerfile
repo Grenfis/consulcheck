@@ -1,13 +1,9 @@
 FROM php:7.4-cli-alpine
 
-ARG SUPERCRONIC_VERSION
-ARG SUPERCRONIC_SHA1SUM
-ARG APP_PATH
-
 # From https://github.com/aptible/supercronic/releases
-ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v${SUPERCRONIC_VERSION}/supercronic-linux-amd64 \
+ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
-    SUPERCRONIC_SHA1SUM=${SUPERCRONIC_SHA1SUM}
+    SUPERCRONIC_SHA1SUM=048b95b48b708983effb2e5c935a1ef8483d9e3e
 
 RUN apk upgrade --update
 
@@ -68,21 +64,8 @@ RUN apk add --no-cache \
 RUN rm -rf /var/cache/apk/
 RUN docker-php-source delete
 
-WORKDIR ${APP_PATH}
-
-#RUN curl -sS https://getcomposer.org/installer | php -- \
-#  --install-dir=/usr/bin --filename=composer && chmod +x /usr/bin/composer
-
-#COPY ./app /var/www/php/app
-#COPY ./composer.json /var/www/php/composer.json
-#COPY ./composer.lock /var/www/php/composer.lock
-#
-#RUN cd /var/www/php  \
-#    && composer install \
-#   --no-interaction \
-#   --prefer-dist \
-#    && composer dump-autoload
-
-#ENTRYPOINT ["/sbin/tini", "--"]
+COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
+COPY ./docker/cron/crontab /etc/crontabs/crontab
+WORKDIR /var/www/php
 
 CMD ["/usr/local/bin/supercronic", "/etc/crontabs/crontab"]
