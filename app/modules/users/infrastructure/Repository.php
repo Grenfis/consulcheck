@@ -43,6 +43,7 @@ class Repository implements IRepository
             ':user_id' => $userId,
         ]);
 
-        return $this->db->result()['user_id'] !== null;
+
+        return isset($this->db->result()['user_id']);
     }
 }
